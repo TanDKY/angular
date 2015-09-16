@@ -6,10 +6,10 @@
   <script src="angular.min.js"></script>
   <script src="application.js"></script>
   <link rel="stylesheet" type="text/css" href="application.css">
-  
+
 </head>
 <body>
-  
+
 <div ng-app="todo" ng-controller="page"> <a href="" ng-click="ui.current(1);">Tab 1</a>
  <a href="" ng-click="ui.current(2);">Tab 2</a>
 
@@ -18,11 +18,25 @@
         <ul ng-repeat="item in list">
             <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
         </ul>
+        <div>
+            <form ng-submit="addNewItem()">
+                Name :
+                <input ng-model="newItem.name" name="name">
+                <input type="submit" value="submit">
+            </form>
+        </div>
     </div>
     <div ng-controller="tab2" ng-show="ui.isCurrent(2);">Tab 2
         <ul ng-repeat="item in list">
             <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
         </ul>
+        <div>
+            <form ng-submit="addNewItem()">
+                Name :
+                <input ng-model="newItem.name" name="name">
+                <input type="submit" value="submit">
+            </form>
+        </div>
     </div>
 </div>
 

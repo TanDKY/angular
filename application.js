@@ -23,6 +23,12 @@ angular.module('todo', [])
                 name: 'buy milk',
                 complete: true
             }];
+            $s.newItem = {};
+            $s.addNewItem = function(){
+                $s.newItem.complete = false;
+                $s.list.push($s.newItem);
+                $s.newItem = {};
+            };
 
     }])
     .controller('tab2', ['$scope',
@@ -37,6 +43,12 @@ angular.module('todo', [])
             name: 'profit',
             complete: false
         }];
+        $s.newItem = {};
+        $s.addNewItem = function(){
+            $s.newItem.complete = false;
+            $s.list.push($s.newItem);
+            $s.newItem = {};
+        };
     }])
     .factory('todoApi', [function () {
     var data = [
