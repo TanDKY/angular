@@ -16,7 +16,9 @@
     <hr/>
     <div ng-controller="tab1" ng-show="ui.isCurrent(1);">Tab 1
         <ul ng-repeat="item in list">
-            <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
+            <li ng-class="{ 'done': item.complete }">{{item.name}}
+                <input type="checkbox" ng-model="item.complete" ng-click="update(item)">
+            </li>
         </ul>
         <div>
             <form ng-submit="addNewItem()">
@@ -28,7 +30,9 @@
     </div>
     <div ng-controller="tab2" ng-show="ui.isCurrent(2);">Tab 2
         <ul ng-repeat="item in list">
-            <li ng-class="{ 'done': item.complete }">{{item.name}}</li>
+            <li ng-class="{ 'done': item.complete }">{{item.name}}
+                <input type="checkbox" ng-model="item.complete" ng-click="update(item)">
+            </li>
         </ul>
         <div>
             <form ng-submit="addNewItem()">

@@ -29,6 +29,10 @@ angular.module('todo', [])
                 $s.list.push($s.newItem);
                 $s.newItem = {};
             };
+            $s.updateItem = function(item){
+                var index = $s.list.indexOf(item);
+                $s.list[index].complete = item.complete;
+            };
 
     }])
     .controller('tab2', ['$scope',
@@ -48,6 +52,10 @@ angular.module('todo', [])
             $s.newItem.complete = false;
             $s.list.push($s.newItem);
             $s.newItem = {};
+        };
+        $s.updateItem = function(item){
+            var index = $s.list.indexOf(item);
+            $s.list[index].complete = item.complete;
         };
     }])
     .factory('todoApi', [function () {
