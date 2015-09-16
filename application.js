@@ -15,10 +15,6 @@ angular.module('todo', [])
                 },
             };
 
-            $s.changeTab = function(item, index){
-
-            };
-
             $s.getTabIndex = function(){
                 return uiCurrent;
             };
@@ -30,14 +26,20 @@ angular.module('todo', [])
 
             $s.newItem = {};
             $s.addNewItem = function(tabName){
-                console.log(tabName);
                 $s.newItem.list = tabName;
                 $s.newItem.complete = false;
                 todoApi.create($s.newItem);
                 $s.newItem = {};
             };
             $s.updateItem = function(item){
-                var index = $s.list.indexOf(item);
+                var index = $s.data.indexOf(item);
+                todoApi.update(index, item);
+            };
+            this.newTab = "";
+            $s.changeTab = function(item){
+                console.log(this.newTab);
+                item.list = this.newTab;
+                var index = $s.data.indexOf(item);
                 todoApi.update(index, item);
             };
 

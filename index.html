@@ -20,6 +20,12 @@
         <ul ng-repeat="item in data">
             <li ng-class="{ 'done': item.complete }" ng-show="item.list == tabs[getTabIndex()-1]">{{item.name}}
                 <input type="checkbox" ng-model="item.complete" ng-click="update(item)">
+                <form ng-submit="changeTab(item)">
+              <select ng-model="newTab" >
+                <option ng-repeat="t in tabs" ng-if="t != item.list" value="{{t}}">{{t}}</option>
+              </select>
+              <input type="submit" value="Change">
+            </form>
             </li>
         </ul>
         <div>
