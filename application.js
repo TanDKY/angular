@@ -2,6 +2,7 @@ angular.module('todo', [])
     .controller('page', ['$scope',
         function ($s) {
             var uiCurrent = 1;
+            $s.tabs = ["shopping", "business"];
             $s.ui = {
                 current: function (newUICurrent) {
                     if (typeof newUICurrent != 'undefined') {
@@ -11,52 +12,35 @@ angular.module('todo', [])
                 },
                 isCurrent: function (c) {
                     return (uiCurrent === c);
-                }
+                },
+            };
+
+            $s.changeTab = function(item, index){
+
+            };
+
+            $s.getTabIndex = function(){
+                return uiCurrent;
             };
     }])
-    .controller('tab1', ['$scope',
-        function ($s) {
-            $s.list = [{
-                name: 'buy eggs',
-                complete: false
-            }, {
-                name: 'buy milk',
-                complete: true
-            }];
+    .controller('tab', ['$scope', 'todoApi',
+        function ($s, todoApi) {
+
+            $s.data = todoApi.query();
+
             $s.newItem = {};
-            $s.addNewItem = function(){
+            $s.addNewItem = function(tabName){
+                console.log(tabName);
+                $s.newItem.list = tabName;
                 $s.newItem.complete = false;
-                $s.list.push($s.newItem);
+                todoApi.create($s.newItem);
                 $s.newItem = {};
             };
             $s.updateItem = function(item){
                 var index = $s.list.indexOf(item);
-                $s.list[index].complete = item.complete;
+                todoApi.update(index, item);
             };
 
-    }])
-    .controller('tab2', ['$scope',
-        function ($s) {
-        $s.list = [{
-            name: 'collect underpants',
-            complete: false
-        }, {
-            name: '...',
-            complete: false
-        }, {
-            name: 'profit',
-            complete: false
-        }];
-        $s.newItem = {};
-        $s.addNewItem = function(){
-            $s.newItem.complete = false;
-            $s.list.push($s.newItem);
-            $s.newItem = {};
-        };
-        $s.updateItem = function(item){
-            var index = $s.list.indexOf(item);
-            $s.list[index].complete = item.complete;
-        };
     }])
     .factory('todoApi', [function () {
     var data = [

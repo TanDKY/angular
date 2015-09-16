@@ -10,32 +10,20 @@
 </head>
 <body>
 
-<div ng-app="todo" ng-controller="page"> <a href="" ng-click="ui.current(1);">Tab 1</a>
- <a href="" ng-click="ui.current(2);">Tab 2</a>
+<div ng-app="todo" ng-controller="page">
+    <div ng-repeat="tab in tabs">
+        <a href="" ng-click="ui.current(tabs.indexOf(tab)+1);">{{tab}}</a>
+    </div>
 
     <hr/>
-    <div ng-controller="tab1" ng-show="ui.isCurrent(1);">Tab 1
-        <ul ng-repeat="item in list">
-            <li ng-class="{ 'done': item.complete }">{{item.name}}
+    <div ng-controller="tab" ng-show="ui.isCurrent(getTabIndex());">{{tab}}
+        <ul ng-repeat="item in data">
+            <li ng-class="{ 'done': item.complete }" ng-show="item.list == tabs[getTabIndex()-1]">{{item.name}}
                 <input type="checkbox" ng-model="item.complete" ng-click="update(item)">
             </li>
         </ul>
         <div>
-            <form ng-submit="addNewItem()">
-                Name :
-                <input ng-model="newItem.name" name="name">
-                <input type="submit" value="submit">
-            </form>
-        </div>
-    </div>
-    <div ng-controller="tab2" ng-show="ui.isCurrent(2);">Tab 2
-        <ul ng-repeat="item in list">
-            <li ng-class="{ 'done': item.complete }">{{item.name}}
-                <input type="checkbox" ng-model="item.complete" ng-click="update(item)">
-            </li>
-        </ul>
-        <div>
-            <form ng-submit="addNewItem()">
+            <form ng-submit="addNewItem(tabs[getTabIndex()-1])">
                 Name :
                 <input ng-model="newItem.name" name="name">
                 <input type="submit" value="submit">
